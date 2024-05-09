@@ -1,20 +1,26 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Notifications\SendFirebaseNotification;
 use App\Models\User;
+use App\Notifications\SendFirebaseNotification;
+use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
-    public function sendFcm()
+    public function sendTestNotification(Request $request)
     {
-        // Replace with an actual user who has a valid FCM token
-        $user = User::find(1);
-        
-        // Send a test notification
-        $user->notify(new SendFirebaseNotification('Test Notification', 'This is a test message from Laravel.'));
+      // Replace 1 with actual user ID or input from the request
+      $user = User::find(1);
 
-        return 'Notification Sent!';
+      // Check if the user exists
+      if ($user) {
+          // Send a notification if the user is found
+          $user->notify(new SendFirebaseNotification('Test Notification', 'Hello from Laravel!'));
+
+          return response()->json(['message' => 'Notification sent successfully.']);
+      } else {
+          // Return an error if the user is not found
+          return response()->json(['error' => 'User not found'], 404);
+      }
     }
 }

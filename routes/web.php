@@ -23,6 +23,5 @@ Route::get('/docs', function () {
     return view('swagger');
 });
 
-
-Route::get('/send-fcm', 'NotificationController@sendFcm');
+Route::get('/send-fcm', [NotificationController::class, 'sendTestNotification']);
 

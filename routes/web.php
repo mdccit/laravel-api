@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,7 @@ Route::get('/', function () {
 Route::get('/docs', function () {
     return view('swagger');
 });
+
+
+Route::get('/send-fcm', 'NotificationController@sendFcm');
+
